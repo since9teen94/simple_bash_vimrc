@@ -27,3 +27,5 @@ alias bashrc='vim ~/.bashrc'
 alias c='clear'
 #shortuct to visit the current directory of your project
 alias cur='cd path/to/current/project'
+#shortcut to update on mac in terminal
+alias softup='softwareupdate -i -a'

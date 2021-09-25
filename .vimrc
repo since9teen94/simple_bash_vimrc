@@ -85,7 +85,7 @@ set mouse=a
 set number
 set relativenumber
 syntax on
-colorscheme Atelier_SeasideDark
+" colorscheme Atelier_SeasideDark
 set tabstop=4
 set expandtab
 set softtabstop=4
