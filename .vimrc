@@ -92,3 +92,58 @@ set softtabstop=4
 set autoindent
 set belloff=all
 set background=dark
+
+
+
+
+
+
+"latest config
+
+"autocmd FileType html,css,python EmmetInstall
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+"let g:user_emmet_install_global = 0
+let mapleader=' '
+"let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:user_emmet_leader_key=','
+let g:UltiSnipsSnippetDirectories=['/Users/alejandroyanez/.local/share/nvim/plugged/ultisnips/snippers']
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+
+set number
+set relativenumber
+set mouse=a
+
+call plug#begin()
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'scrooloose/nerdtree'
+Plug 'sirver/ultisnips'
+Plug 'scrooloose/nerdcommenter'
+Plug 'mattn/emmet-vim'
+Plug 'neoclide/coc.nvim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf.vim'
+call plug#end()
+
+colorscheme dracula
+
+inoremap jj <esc>
+inoremap jk {}<left>
+inoremap qq []<left>
+inoremap (<space> ()<left>
+inoremap '<space> ''<left>
+inoremap "<space> ""<left>
+inoremap `<space> ``<left>
+nnoremap <leader>s :w<cr>
+nnoremap <leader>p :Prettier<cr>
+"nnoremap <c-w> <c-w>w
+"nnoremap <c-w> <c-w><c-w>:NERDTreeToggle<cr>
+nnoremap <leader>q :wq<cr>
+nnoremap <c-f> :Ag<space>
+nnoremap <c-t> :NERDTreeToggle<cr>
+"nnoremap <c-n> :NERDTreeFind<cr>
+
