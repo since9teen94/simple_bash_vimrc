@@ -1,149 +1,106 @@
-"leader key to space bar
-let mapleader = "\<space>"
-"emmet expansion key is /'
-let g:user_emmet_expandabbr_key = "/\'"
-"remap escape to jj in insert mode
-inoremap jj <esc>
-"a quality of life with the jk keys
-inoremap jk <esc>O
-"use alt+j to navigate autocompletes
-inoremap <esc>j <c-n>
-"use alt+k to navigate autocompletes
-inoremap <esc>k <c-p>
-"use alt+t to navigate line autocompletes
-inoremap <esc>t <c-x><c-l>
-"use alt+a,o,e,u,i in insert mode to easily insert registers
-inoremap <esc>a <c-r>a
-inoremap <esc>o <c-r>o
-inoremap <esc>e <c-r>e
-inoremap <esc>u <c-r>u
-inoremap <esc>i <c-r>i
-"use alt+a,o,e,u,i in normal mode to easily fill registers
-nnoremap <esc>a "ayiw
-nnoremap <esc>o "oyiw
-nnoremap <esc>e "eyiw
-nnoremap <esc>u "uyiw
-nnoremap <esc>i "iyiw
-"react error, with usestate, when the usestate line is set up
-nnoremap <esc>r yypf[wwiError<esc>wwwiError<esc>
-"quick save with leader s
-nnoremap <leader>s :w<cr>
-"quick save and exit with leader q
-nnoremap <leader>q :wq<cr>
-"quick change inside word
-nnoremap <leader>i ciw
-"quick yank inside word
-nnoremap <leader>y yiw
-"quick paste inside word, changes word to last yanked item
-nnoremap <leader>v viwp
-"use to set up the usestate line in react
-inoremap s/, <esc>:s/set\(.\)/set\u\1/<cr>A
-"alt+c for react, sets up a component
-inoremap <esc>c <c-r>%<esc>:s/.js//<cr>A<space>= (props) => {<cr>}<esc>O
-"shortcut for last line in react, export default
-inoremap <esc>x export default <c-r>%<esc>:s/.js//<cr>A;
-"shortcut for const, primarily a quality of life hack in react
-iab c const
-"shortcut for react, primarily a quality of life hack
-inoremap e/, e.target.value
-"shortcut for useState(""); was used when learning react useState
-iab u <space>= useState("");
-"shortcut for setting up a react component that uses useState, first line
-"import
-inoremap r/, import React, {useState} from 'react';<cr><cr>
-"a shortcut for a default html label and input
-inoremap i/, <label for="xx">xx</label><cr><input type="text" name="xx" id="xx"><esc>:-1,.s/xx//g<left><left>
-"shortcut for making database calls in Flask
-inoremap m/, mysql=connectToMySQL(SCHEMA)<cr>query="xx"<cr>data={"xx":xx}<cr>xx=mysql.query_db(query, data)<esc>3k/xx<cr>ciw
-"shortcut for routes in flask
-iab @ @app.route('/<space><backspace>')<left><left><c-r>r<esc>
-"shortcut for the end of the Flask page, if __name__ == '__main__'
-iab __n if __name__=='__main__':<cr>app.run(debug=True)<space><backspace><esc>
-"shortuct for flask check for user id in session / logged in
-inoremap uid/, if 'userid' in session:<cr><backspace>return redirect('/<space><backspace>')<esc>O
-"shortcut for request.form[''] 
-inoremap rf/, request.form['']<left><left>
-"shortcut for error messages in flask
-inoremap fm/, {% with messages = get_flashed_messages() %}<cr><tab>{% if messages %}<cr><tab>{% for message in messages %}<cr><tab><p>{{message}}</p><cr><backspace>{% endfor %}<cr><backspace>{% endif %}<cr><backspace>{% endwith %}
-"shortcut used in making flash messages in flask
-inoremap f/, flash("xx")<esc>Ois_valid=False<esc>/xx<cr>ciw
-
-"plugins and other settings 
 call plug#begin()
-Plug 'prettier/vim-prettier'
-Plug 'tpope/vim-surround'
-Plug 'hdima/python-syntax'
-Plug 'neoclide/coc.nvim'
-Plug 'mattn/emmet-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'groenewege/vim-less'
-Plug 'raimondi/delimitmate'
-Plug 'scrooloose/nerdcommenter'
-call plug#end()
-
-set mouse=a
-set number
-set relativenumber
-syntax on
-" colorscheme Atelier_SeasideDark
-set tabstop=4
-set expandtab
-set softtabstop=4
-set autoindent
-set belloff=all
-set background=dark
-
-
-
-
-
-
-"latest config
-
-"autocmd FileType html,css,python EmmetInstall
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-"let g:user_emmet_install_global = 0
-let mapleader=' '
-"let g:ackprg = 'ag --nogroup --nocolor --column'
-let g:user_emmet_leader_key=','
-let g:UltiSnipsSnippetDirectories=['/Users/alejandroyanez/.local/share/nvim/plugged/ultisnips/snippers']
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-
-set number
-set relativenumber
-set mouse=a
-
-call plug#begin()
+Plug 'yuttie/comfortable-motion.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'scrooloose/nerdtree'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+Plug 'tpope/vim-repeat'
 Plug 'sirver/ultisnips'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mattn/emmet-vim'
-Plug 'neoclide/coc.nvim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}
 Plug 'tpope/vim-surround'
-Plug 'junegunn/fzf.vim'
-call plug#end()
+Plug 'raimondi/delimitmate'
+Plug 'rust-lang/rust.vim'
 
+call plug#end()
+syntax enable
+filetype plugin indent on
+set ts=4
+set sts=4
+set sw=4
+set expandtab
+set hlsearch
+set incsearch
+set smarttab
+"set tw=0
+"set textwidth=80
+"set colorcolumn=80
+set number
+set relativenumber
+set mouse=a
+set smartindent
+set clipboard+=unnamedplus
 colorscheme dracula
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+autocmd FileType htmldjango,html,css EmmetInstall
+"autocmd BufWinLeave *.* mkview
+"autocmd BufWinEnter *.* silent loadview
+
+noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(100)<CR>
+noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-100)<CR>
+
+let g:user_emmet_install_global = 0
+let mapleader=' '
+let g:comfortable_motion_no_default_key_mappings = 1
+let delimitMate_expand_space=1
+let delimitMate_expand_cr=1
+let delimitMate_matchpairs = "(:),[:],{:}"
+"let g:user_emmet_leader_key=','
+let g:UltiSnipsSnippetDirectories=['/home/alejandro/.local/share/nvim/plugged/ultisnips/snippers']
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:rustfmt_autosave = 1
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 inoremap jj <esc>
 inoremap jk {}<left>
-inoremap qq []<left>
-inoremap (<space> ()<left>
-inoremap '<space> ''<left>
-inoremap "<space> ""<left>
-inoremap `<space> ``<left>
-nnoremap <leader>s :w<cr>
-nnoremap <leader>p :Prettier<cr>
-"nnoremap <c-w> <c-w>w
-"nnoremap <c-w> <c-w><c-w>:NERDTreeToggle<cr>
-nnoremap <leader>q :wq<cr>
-nnoremap <c-f> :Ag<space>
-nnoremap <c-t> :NERDTreeToggle<cr>
-"nnoremap <c-n> :NERDTreeFind<cr>
+"inoremap JK {%%}<left><left><space><space><left>
+"inoremap jk ::<><left>
+inoremap jk ::
+inoremap <c-z> <plug>(emmet-expand-abbr)
+inoremap <c-d> <esc>A
+"paste from clipboard
+"inoremap <c-v> <esc>"+p
+"inoremap qq []<left>
+"inoremap <c-l> <right>
+"inoremap <c-h> <left>
+inoremap <c-s> <esc>viwy:s/<c-r>0//g<left><left>
+inoremap <silent><expr> <cr> coc#pum#visible() ? 
+	\ coc#pum#confirm() : 
+	\ delimitMate#WithinEmptyPair() ? 
+	\ "<Plug>delimitMateCR" :
+	\ "<cr>"
 
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+nnoremap <c-s> viwy:s/<c-r>0//g<left><left>
+nnoremap <leader>s :w<cr>
+"inoremap <c-g> <c-x>
+nnoremap <leader>p :Prettier<cr>
+nnoremap <leader>q :wq<cr>
+nnoremap <c-t> :NERDTreeToggle<cr>
+nnoremap <c-n> :NERDTree<cr>
+" Find files using Telescope command-line sugar.
+nnoremap <c-f> <cmd>Telescope find_files<cr>
+nnoremap <c-g> <cmd>Telescope live_grep<cr>
+nnoremap <c-b> <cmd>Telescope buffers<cr>
+nnoremap <c-h> <cmd>Telescope help_tags<cr>
